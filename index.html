@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">STOCK CONTROL</p>
+      <h1>Inventory Management</h1>
+      <p class="subtitle">Record items, monitor quantities and identify low stock.</p>
+    </div>
+    <span class="status-pill"> System ready</span>
+  </header>
+
+  <main class="container">
+    <section class="summary-grid" aria-label="Inventory summary">
+      <article class="summary-card">
+        <span class="summary-label">Total item types</span>
+        <strong id="itemCount">0</strong>
+        <span class="summary-note">Different products recorded</span>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Total units in stock</span>
+        <strong id="unitCount">0</strong>
+        <span class="summary-note">Combined quantity</span>
+      </article>
+      <article class="summary-card">
+        <span class="summary-label">Stock value</span>
+        <strong id="stockValue">KSh 0.00</strong>
+        <span class="summary-note">Quantity unit price</span>
+      </article>
+      <article class="summary-card warning-card">
+        <span class="summary-label">Low-stock items</span>
+        <strong id="lowStockCount">0</strong>
+        <span class="summary-note">At or below reorder level</span>
+      </article>
+    </section>
+
+    <section class="panel form-panel">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">NEW RECORD</p>
+          <h2>Add an inventory item</h2>
+        </div>
+      </div>
+      <form id="itemForm">
+        <div class="form-grid">
+          <label>
+            Item name
+            <input id="itemName" type="text" placeholder="e.g. A4 paper" required maxlength="60">
+          </label>
+          <label>
+            Quantity
+            <input id="quantity" type="number" min="0" step="1" placeholder="e.g. 25" required>
+          </label>
+          <label>
+            Unit price (KSh)
+            <input id="unitPrice" type="number" min="0" step="0.01" placeholder="e.g. 450" required>
+          </label>
+          <label>
+            Low-stock level
+            <input id="reorderLevel" type="number" min="0" step="1" value="5" required>
+          </label>
+        </div>
+        <div class="form-footer">
+          <p id="formMessage" class="form-message" aria-live="polite">Enter the item details to add it to your stock.</p>
+          <button type="submit" class="primary-btn">+ Add item</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel inventory-panel">
+      <div class="inventory-heading">
+        <div>
+          <p class="eyebrow">INVENTORY LIST</p>
+          <h2>Current stock</h2>
+        </div>
+        <input id="searchInput" class="search-input" type="search" placeholder="Search item name…" aria-label="Search item name">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Quantity</th>
+              <th>Unit price</th>
+              <th>Stock value</th>
+              <th>Reorder level</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="inventoryBody">
+            <tr class="empty-row"><td colspan="6">No inventory items yet. Add your first item above.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-footnote">Items are saved in this browser using local storage.</p>
+    </section>
+  </main>
+  <footer>Inventory Management System · HTML, CSS and JavaScript</footer>
+
+  <script src="inventory.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
