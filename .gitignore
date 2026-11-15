@@ -1,0 +1,24 @@
+
+# Local inventory data
+inventory-data.json
+
+# Django database backups
+*.sqlite3
+*.sqlite3.backup
+*.bacckup
+
+# Python virtual environments and generated files
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Node.js dependencies
+node_modules/
+
+# Local editor configuration
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db

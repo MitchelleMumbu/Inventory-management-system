@@ -1,109 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inventory Management System</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">STOCK CONTROL</p>
-      <h1>Inventory Management</h1>
-      <p class="subtitle">Record items, monitor quantities and identify low stock.</p>
+<div class="dashboard">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon"></div>
+            <div>
+                <h2>Inventory</h2>
+                <p>Management System</p>
+            </div>
+        </div>
+        <nav class="navigation">
+          <a href="#dashboard" class="nav-link active">Dashboard</a>
+         <a href="#inventory" class="nav-link">Inventory</a>
+         <a href="#add-item" class="nav-link">Add New Item</a>
+         <a href="#reports" class="nav-link">Reports</a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="leaf"></div>
+            <p>Better Stock Management<br>for a Brighter Future</p>
+        </div>
+    </aside>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <div class="top-search">
+                <span></span>
+                <input type="search" placeholder="Search items by name...">
+            </div>
+            <div class="profile">
+                <span class="notification"></span>
+                <div class="profile-avatar"></div>
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Inventory Manager</small>
+                </div>
+            </div>
+        </header>
+        <div class="content" id="dashboard">
+            <!-- WELCOME -->
+            <section class="welcome-section">
+                <div>
+                    <h1>Welcome back!</h1>
+                    <p>Here's what's happening with your inventory today.</p>
+                </div>
+                <div class="date">
+                    <strong>Inventory Overview</strong>
+                    <small>Stock Management Dashboard</small>
+                </div>
+            </section>
+            <!-- SUMMARY CARDS -->
+            <section class="summary-grid">
+                <article class="summary-card">
+                    <div class="summary-icon plum"></div>
+                    <div>
+                        <span class="summary-label">Total Item Types</span>
+                        <strong id="itemCount">0</strong>
+                        <small>Different products recorded</small>
+                    </div>
+                </article>
+                <article class="summary-card">
+                    <div class="summary-icon olive"></div>
+                    <div>
+                        <span class="summary-label">Total Units in Stock</span>
+                        <strong id="unitCount">0</strong>
+                        <small>Combined quantity</small>
+                    </div>
+                </article>
+                <article class="summary-card">
+                    <div class="summary-icon plum"></div>
+                    <div>
+                        <span class="summary-label">Total Stock Value</span>
+                        <strong id="stockValue">KSh 0.00</strong>
+                        <small>Current inventory value</small>
+                    </div>
+                </article>
+                <article class="summary-card">
+                    <div class="summary-icon olive"></div>
+                    <div>
+                        <span class="summary-label">Low-Stock Items</span>
+                        <strong id="lowStockCount">0</strong>
+                        <small>Items requiring attention</small>
+                    </div>
+                </article>
+            </section>
+            <!-- DASHBOARD PANELS -->
+            <section class="dashboard-panels">
+                <!-- ADD ITEM -->
+                <article class="panel form-panel" id="add-item">
+                    <div class="panel-heading">
+                        <h2> Add New Item</h2>
+                    </div>
+                    <form id="itemForm">
+                        <div class="form-grid">
+                            <label>
+                                Item Name *
+                                <input id="itemName" type="text"
+                                    placeholder="Enter item name"
+                                    required maxlength="60">
+                            </label>
+                            <label>
+                                Category
+                                <select id="itemCategory">
+                                    <option value="General">General</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Stationery">Stationery</option>
+                                    <option value="Furniture">Furniture</option>
+                                    <option value="Home & Kitchen">Home & Kitchen</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                            </label>
+                            <label>
+                                Quantity *
+                                <input id="quantity" type="number"
+                                    min="0" step="1"
+                                    placeholder="Enter quantity" required>
+                            </label>
+                            <label>
+                                Unit Price (KSh) *
+                                <input id="unitPrice" type="number"
+                                    min="0" step="0.01"
+                                    placeholder="Enter unit price" required>
+                            </label>
+                            <label class="full-width">
+                                Low-Stock Level *
+                                <input id="reorderLevel" type="number"
+                                    min="0" step="1" value="5" required>
+                            </label>
+                        </div>
+                        <div class="form-footer">
+                            <p id="formMessage" class="form-message"
+                                aria-live="polite">
+                                Enter item details to add to your stock.
+                            </p>
+                            <button type="submit" class="primary-btn">
+                              + Add Item
+                            </button>
+                        </div>
+                    </form>
+                </article>
+                <!-- STOCK VALUE CHART PLACEHOLDER -->
+                <article class="panel chart-panel" id="dashboard-chart">
+                    <div class="panel-heading">
+                        <h2> Stock Value by Category</h2>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="chart-bars">
+                            <div class="bar olive-bar" style="height: 90%">
+                                <span>Electronics</span>
+                            </div>
+                            <div class="bar plum-bar" style="height: 60%">
+                                <span>Stationery</span>
+                            </div>
+                            <div class="bar olive-bar" style="height: 40%">
+                                <span>Furniture</span>
+                            </div>
+                            <div class="bar plum-bar" style="height: 25%">
+                                <span>Others</span>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="chart-note">
+                        Category chart preview — we'll connect real data later.
+                    </small>
+                </article>
+                <!-- LOW STOCK ALERTS -->
+                <article class="panel alerts-panel">
+                    <div class="panel-heading">
+                        <h2>Low Stock Alerts</h2>
+                    </div>
+                    <div class="alert-list">
+                        <p>Your low-stock items will appear here.</p>
+                    </div>
+                </article>
+            </section>
+            <!-- INVENTORY SEARCH -->
+            <section class="filter-bar">
+                <input id="searchInput" type="search"
+                    placeholder="Search items by name..."
+                    aria-label="Search item name">
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="General">General</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Stationery">Stationery</option>
+                    <option value="Furniture">Furniture</option>
+                    <option value="Home & Kitchen">Home & Kitchen</option>
+                    <option value="Others">Others</option>
+                </select>
+                <select id="statusFilter">
+                    <option value="">All Stock Status</option>
+                    <option value="ok">In Stock</option>
+                    <option value="low">Low Stock</option>
+                </select>
+                <button type="button" class="search-btn">Search</button>
+                <button type="button" class="reset-btn">Reset</button>
+            </section>
+            <!-- INVENTORY TABLE -->
+            <section class="panel inventory-panel" id="inventory">
+                <div class="inventory-heading">
+                    <h2>Inventory Items</h2>
+                    <span>Current stock records</span>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Item Name</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Unit Price (KSh)</th>
+                                <th>Stock Value (KSh)</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryBody">
+                            <tr class="empty-row">
+                                <td colspan="8">
+                                    No inventory items yet.
+                                    Add your first item above.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-footnote">
+                    Inventory Management System
+                </p>
+            </section>
+
+<!-- REPORTS SECTION -->
+<section class="reports-section" id="reports">
+
+    <div class="reports-heading">
+        <div>
+            <h2>Inventory Reports</h2>
+            <p>Analyse your stock performance and inventory position.</p>
+        </div>
+
+        <div class="report-actions">
+            <button type="button" id="printReport">Print Report</button>
+            <button type="button" id="exportReport">Export CSV</button>
+        </div>
     </div>
-    <span class="status-pill"> System ready</span>
-  </header>
-
-  <main class="container">
-    <section class="summary-grid" aria-label="Inventory summary">
-      <article class="summary-card">
-        <span class="summary-label">Total item types</span>
-        <strong id="itemCount">0</strong>
-        <span class="summary-note">Different products recorded</span>
-      </article>
-      <article class="summary-card">
-        <span class="summary-label">Total units in stock</span>
-        <strong id="unitCount">0</strong>
-        <span class="summary-note">Combined quantity</span>
-      </article>
-      <article class="summary-card">
-        <span class="summary-label">Stock value</span>
-        <strong id="stockValue">KSh 0.00</strong>
-        <span class="summary-note">Quantity unit price</span>
-      </article>
-      <article class="summary-card warning-card">
-        <span class="summary-label">Low-stock items</span>
-        <strong id="lowStockCount">0</strong>
-        <span class="summary-note">At or below reorder level</span>
-      </article>
-    </section>
-
-    <section class="panel form-panel">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">NEW RECORD</p>
-          <h2>Add an inventory item</h2>
+    <!-- REPORT SUMMARY -->
+    <div class="report-summary">
+        <article class="report-card">
+            <span>Total Products</span>
+            <strong id="reportItemCount">0</strong>
+        </article>
+        <article class="report-card">
+            <span>Total Units</span>
+            <strong id="reportUnitCount">0</strong>
+        </article>
+        <article class="report-card">
+            <span>Total Stock Value</span>
+            <strong id="reportStockValue">KSh 0.00</strong>
+        </article>
+        <article class="report-card">
+            <span>Low-Stock Products</span>
+            <strong id="reportLowStock">0</strong>
+        </article>
+    </div>
+    <!-- CATEGORY REPORT -->
+    <article class="panel report-chart">
+        <div class="panel-heading">
+            <h2>Stock Value by Category</h2>
         </div>
+        <div class="report-chart-content">
+      <div id="reportCategoryChart">
+        <p>Add inventory items to generate your report.</p>
       </div>
-      <form id="itemForm">
-        <div class="form-grid">
-          <label>
-            Item name
-            <input id="itemName" type="text" placeholder="e.g. A4 paper" required maxlength="60">
-          </label>
-          <label>
-            Quantity
-            <input id="quantity" type="number" min="0" step="1" placeholder="e.g. 25" required>
-          </label>
-          <label>
-            Unit price (KSh)
-            <input id="unitPrice" type="number" min="0" step="0.01" placeholder="e.g. 450" required>
-          </label>
-          <label>
-            Low-stock level
-            <input id="reorderLevel" type="number" min="0" step="1" value="5" required>
-          </label>
+     <div id="reportPieChart" class="report-pie-layout">
+        <div class="pie-chart-circle">
+            <div class="pie-chart-hole">
+                <strong>0%</strong>
+                <small>Total Value</small>
+            </div>
         </div>
-        <div class="form-footer">
-          <p id="formMessage" class="form-message" aria-live="polite">Enter the item details to add it to your stock.</p>
-          <button type="submit" class="primary-btn">+ Add item</button>
+        <div id="pieChartLegend" class="pie-chart-legend">
         </div>
-      </form>
-    </section>
+     </div>
+    </div>
+    </article>
+    <!-- LOW STOCK REPORT -->
+    <article class="panel report-table">
+        <div class="panel-heading">
+            <h2>Low-Stock Report</h2>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Reorder Level</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="reportLowStockBody">
+                    <tr>
+                        <td colspan="5">No low-stock items.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
 
-    <section class="panel inventory-panel">
-      <div class="inventory-heading">
-        <div>
-          <p class="eyebrow">INVENTORY LIST</p>
-          <h2>Current stock</h2>
         </div>
-        <input id="searchInput" class="search-input" type="search" placeholder="Search item name…" aria-label="Search item name">
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Quantity</th>
-              <th>Unit price</th>
-              <th>Stock value</th>
-              <th>Reorder level</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="inventoryBody">
-            <tr class="empty-row"><td colspan="6">No inventory items yet. Add your first item above.</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="table-footnote">Items are saved in this browser using local storage.</p>
-    </section>
-  </main>
-  <footer>Inventory Management System · HTML, CSS and JavaScript</footer>
-
-  <script src="inventory.js"></script>
-  <script src="app.js"></script>
+    </main>
+</div>
+<script src="inventory.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
